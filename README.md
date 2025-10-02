@@ -13,3 +13,15 @@ This project trains a model on the [Hateful Memes dataset](https://www.kaggle.co
 
 ### 2. Clone This Repository  
 
+- Clone this repo to your computer.
+
+### 3. Installing Dependencies
+
+Open a command prompt in the folder for this repo and run the command 
+
+```bash
+pip install -r requirements.txt
+```
+
+To install all the required dependencies.
+
