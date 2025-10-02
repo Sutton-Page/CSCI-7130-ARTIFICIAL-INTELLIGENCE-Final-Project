@@ -76,7 +76,7 @@ def run_experiment(epochs=epochs):
         callbacks=[checkpoint_callback],
     )
     mobilevit_xxs.load_weights(checkpoint_filepath)
-    _, accuracy = mobilevit_xxs.evaluate(val_dataset)
+    _, accuracy = mobilevit_xxs.evaluate(val_ds)
     print(f"Validation accuracy: {round(accuracy * 100, 2)}%")
     return mobilevit_xxs
 
