@@ -14,6 +14,7 @@ This project trains a model on the [Hateful Memes dataset](https://www.kaggle.co
 ### 2. Clone This Repository  
 
 - Clone this repo to your computer.
+- Then move the unziped folder `data` containing the hateful meme dataset to the folder containing the repo you cloned or downloaded.
 
 ### 3. Installing Dependencies
 
@@ -33,5 +34,8 @@ python create_dataset.py
 ```
 This file will take a minute to run as it is moving a bunch of files to new folders.
 ### 5. Training the dataset
-
+- Run the command below to train the model on the hateful meme dataset.
+```bash
+python train_model_with_dataset.py
+```
 
