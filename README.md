@@ -28,10 +28,11 @@ To install all the required dependencies.
 
 ### 4. Creating dataset for tensorflow
 
-Within the folder for this repo run the command
+To create organize the dataset for training run the command below from a command prompt or just click on the windows explorer.
 ```bash
 python create_dataset.py
 ```
+
 This file will take a minute to run as it is moving a bunch of files to new folders.
 ### 5. Training the dataset
 - Run the command below to train the model on the hateful meme dataset.
