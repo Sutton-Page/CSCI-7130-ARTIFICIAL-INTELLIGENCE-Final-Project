@@ -25,3 +25,13 @@ pip install -r requirements.txt
 
 To install all the required dependencies.
 
+### 4. Creating dataset for tensorflow
+
+Within the folder for this repo run the command
+```bash
+python create_dataset.py
+```
+This file will take a minute to run as it is moving a bunch of files to new folders.
+### 5. Training the dataset
+
+
