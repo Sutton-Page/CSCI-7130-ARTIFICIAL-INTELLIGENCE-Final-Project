@@ -77,4 +77,21 @@ def run_experiment(epochs=epochs):
     return mobilevit_xxs
 
 
+# Training the model
+trained_model  = run_experiment(epochs)
+
+tf.saved_model.save(trained_model, "mobilevit_xxs")
+
+# Convert to TFLite. This form of quantization is called
+# post-training dynamic-range quantization in TFLite.
+converter = tf.lite.TFLiteConverter.from_saved_model("mobilevit_xxs")
+converter.optimizations = [tf.lite.Optimize.DEFAULT]
+converter.target_spec.supported_ops = [
+    tf.lite.OpsSet.TFLITE_BUILTINS,  # Enable TensorFlow Lite ops.
+    tf.lite.OpsSet.SELECT_TF_OPS,  # Enable TensorFlow ops.
+]
+tflite_model = converter.convert()
+open("mobilevit_xxs.tflite", "wb").write(tflite_model)
+
+
 
