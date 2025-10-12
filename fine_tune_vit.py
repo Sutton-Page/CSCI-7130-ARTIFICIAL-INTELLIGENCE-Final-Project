@@ -11,13 +11,8 @@ from transformers import (
 from evaluate import load
 
 
-# ===============================
-# 1. Load dataset
-# ===============================
-# Your dataset should have train.jsonl, test.jsonl and img/ folder with images.
-# Example train.jsonl entry:
-# {"image": "img/16395.png", "label": 0}
-dataset = load_dataset('./data')
+
+dataset = load_dataset('./memes')
 
 # ===============================
 # 2. Preprocess images
@@ -34,9 +29,7 @@ def transform(example_batch):
     return inputs
 
 dataset = dataset.with_transform(transform)
-# ===============================
-# 3. Load model
-# ===============================
+
 
 
 model = MobileViTForImageClassification.from_pretrained(
@@ -45,9 +38,7 @@ model = MobileViTForImageClassification.from_pretrained(
     ignore_mismatched_sizes=True  # replaces classifier head
 )
 
-# ===============================
-# 4. Data collator
-# ===============================
+
 def collate_fn(batch):
     return {
         "pixel_values": torch.stack([x["pixel_values"] for x in batch]),
@@ -59,9 +50,8 @@ metric = load("accuracy")
 def compute_metrics(p):
     return metric.compute(predictions=np.argmax(p.predictions, axis=1), references=p.label_ids)
 
-# ===============================
-# 5. Training setup
-# ===============================
+
+
 training_args = TrainingArguments(
     output_dir="./results",
     save_strategy="epoch",
@@ -88,14 +78,10 @@ trainer = Trainer(
     data_collator=collate_fn,
 )
 
-# ===============================
-# 6. Train
-# ===============================
+
 trainer.train()
 
-# ===============================
-# 7. Save model
-# ===============================
+
 trainer.save_model("./mobilevit-small-finetuned")
 processor.save_pretrained("./mobilevit-small-finetuned")
 
