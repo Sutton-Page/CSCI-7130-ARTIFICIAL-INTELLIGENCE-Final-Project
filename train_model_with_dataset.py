@@ -77,6 +77,7 @@ def run_experiment(epochs=epochs):
     return mobilevit_xxs
 
 
+'''
 # Training the model
 trained_model  = run_experiment(epochs)
 
@@ -92,6 +93,6 @@ converter.target_spec.supported_ops = [
 ]
 tflite_model = converter.convert()
 open("mobilevit_xxs.tflite", "wb").write(tflite_model)
-
+'''
 
 
