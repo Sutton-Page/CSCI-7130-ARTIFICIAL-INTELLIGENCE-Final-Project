@@ -28,9 +28,9 @@ To install all the required dependencies.
 
 ### 4. Creating dataset for tensorflow
 
-To create organize the dataset for training run the command below from a command prompt or just double click on the `create_dataset.py` file in  windows explorer.
+To create organize the dataset for training run the command below from a command prompt or just double click on the `organize_dataset.py` file in  windows explorer.
 ```bash
-python create_dataset.py
+python organize_dataset.py
 ```
 
 This file will take a minute to run as it is moving a bunch of files to new folders.
