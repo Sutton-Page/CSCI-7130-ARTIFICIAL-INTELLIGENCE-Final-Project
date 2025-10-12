@@ -2,26 +2,18 @@ import tensorflow as tf
 import keras
 from model import create_mobilevit
 
-
-
-
 train_ds = tf.keras.utils.image_dataset_from_directory(
-  './memes',
-  validation_split=0.2,
-  subset="training",
-  seed=123,
-  image_size=(256,256),
-  batch_size=32)
-
-
-val_ds = tf.keras.utils.image_dataset_from_directory(
-
-    './memes',
-    validation_split=0.2,
-    subset="validation",
+    './memes/train',
     seed=123,
     image_size=(256,256),
     batch_size=32)
+
+val_ds = tf.keras.utils.image_dataset_from_directory(
+    './memes/test',
+    seed=123,
+    image_size=(256,256),
+    batch_size=32)
+
 
 train_ds = train_ds.map(
 
@@ -77,7 +69,7 @@ def run_experiment(epochs=epochs):
     return mobilevit_xxs
 
 
-'''
+
 # Training the model
 trained_model  = run_experiment(epochs)
 
@@ -93,6 +85,6 @@ converter.target_spec.supported_ops = [
 ]
 tflite_model = converter.convert()
 open("mobilevit_xxs.tflite", "wb").write(tflite_model)
-'''
+
 
 
