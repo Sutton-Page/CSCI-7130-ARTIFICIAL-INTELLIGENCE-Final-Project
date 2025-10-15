@@ -21,11 +21,28 @@ model_id = "apple/mobilevit-small"
 processor =  MobileViTImageProcessor.from_pretrained(model_id)
 
 def transform(example_batch):
-    # Take a list of PIL images and turn them to pixel values
-    inputs = processor([x for x in example_batch['image']], return_tensors='pt')
+    images = []
+    valid_labels = []
+    
+    for img, label in zip(example_batch['image'], example_batch['label']):
+        try:
+         
+            
+            if isinstance(img, Image.Image):
+                img = img.convert("RGB")
+            else:
+                raise ValueError("Image is not a valid PIL Image or path")
+            
+            images.append(img)
+            valid_labels.append(label)
+        except Exception as e:
+            print(f"Skipping bad image due to error: {e}")
+            continue
 
-    # Don't forget to include the labels!
-    inputs['label'] = example_batch['label']
+    # Only process valid images
+    inputs = processor(images, return_tensors='pt')
+    inputs['label'] = valid_labels
+    
     return inputs
 
 dataset = dataset.with_transform(transform)
